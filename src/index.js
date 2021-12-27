@@ -18,7 +18,7 @@ const EXECUTABLE_PATH = process.env.PUPPETEER_EXECUTABLE_PATH;
     // Creates a new page on the default browser context
     browser = await puppeteer.launch({
       headless: HEADLESS_MODE,
-      executablePath: "/usr/bin/chromium-browser",
+      executablePath: EXECUTABLE_PATH,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     const page = await browser.newPage();

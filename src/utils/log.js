@@ -21,6 +21,8 @@ if (config.parsed.LOG_TO_FILE_ENABLED == "true") {
   log4jsConfig.appenders["file"] = {
     type: "file",
     filename: path.resolve(config.parsed.LOG_FILENAME),
+    maxLogSize: 10485760,
+    backups: 15,
   };
   log4jsConfig.categories.default.appenders.push("file");
 }

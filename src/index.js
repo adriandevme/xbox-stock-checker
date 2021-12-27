@@ -6,6 +6,7 @@ const telegram = require("./utils/telegram");
 
 //PUPPETEER - Config
 const HEADLESS_MODE = process.env.PUPPETEER_HEADLESS_MODE;
+const EXECUTABLE_PATH = process.env.PUPPETEER_EXECUTABLE_PATH;
 
 // /*
 //   SCRIPT START
@@ -15,7 +16,11 @@ const HEADLESS_MODE = process.env.PUPPETEER_HEADLESS_MODE;
   let browser;
   try {
     // Creates a new page on the default browser context
-    browser = await puppeteer.launch({ headless: HEADLESS_MODE });
+    browser = await puppeteer.launch({
+      headless: HEADLESS_MODE,
+      executablePath: "/usr/bin/chromium-browser",
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
     const page = await browser.newPage();
     if (HEADLESS_MODE)
       await page.setUserAgent(

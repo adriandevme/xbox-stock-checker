@@ -9,49 +9,48 @@ const HEADLESS_MODE = process.env.PUPPETEER_HEADLESS_MODE;
 const EXECUTABLE_PATH = process.env.PUPPETEER_EXECUTABLE_PATH;
 const DEFAULT_PAGE_TIMEOUT = process.env.PUPPETEER_DEFAULT_PAGE_TIMEOUT;
 
-  // /*
-  //   SCRIPT START
-  // */
-  async () => {
-    logger.info("Starting script");
-    let browser;
-    try {
-      // Creates a new page on the default browser context
-      browser = await puppeteer.launch({
-        headless: HEADLESS_MODE,
-        executablePath: EXECUTABLE_PATH,
-        args: ["--no-sandbox", "--disable-setuid-sandbox"],
-      });
-      const page = await browser.newPage();
-      if (HEADLESS_MODE)
-        await page.setUserAgent(
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
-        );
-      await page.setViewport({ width: 1080, height: 720 });
-      await page.setDefaultNavigationTimeout(DEFAULT_PAGE_TIMEOUT); // change timeout
+// /*
+//   SCRIPT START
+// */
+(async () => {
+  logger.info("Starting script");
+  let browser;
+  try {
+    // Creates a new page on the default browser context
+    browser = await puppeteer.launch({
+      headless: HEADLESS_MODE,
+      executablePath: EXECUTABLE_PATH,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
+    const page = await browser.newPage();
+    if (HEADLESS_MODE)
+      await page.setUserAgent(
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+      );
+    await page.setViewport({ width: 1080, height: 720 });
+    await page.setDefaultNavigationTimeout(DEFAULT_PAGE_TIMEOUT); // change timeout
 
-      // Require all products.
-      var products = Object.values(
-        require("require-all")(__dirname + "/products")
-      ).flat();
-      // Loop through products
-      for (product of products) {
-        // Check stock
-        let checker = require(`./checkers/${product.checker}`);
-        let stock = await checker.checkStock(page, product);
-        // Notify stock
-        if (stock) notifyStock(product);
-      }
-      // Close browser
-      logger.info("Script stopped");
-      await browser.close();
-    } catch (e) {
-      logger.error(e.message);
-      logger.error(e.stack);
-      await browser.close();
+    // Require all products.
+    var products = Object.values(
+      require("require-all")(__dirname + "/products")
+    ).flat();
+    // Loop through products
+    for (product of products) {
+      // Check stock
+      let checker = require(`./checkers/${product.checker}`);
+      let stock = await checker.checkStock(page, product);
+      // Notify stock
+      if (stock) notifyStock(product);
     }
+    // Close browser
+    logger.info("Script stopped");
+    await browser.close();
+  } catch (e) {
+    logger.error(e.message);
+    logger.error(e.stack);
+    await browser.close();
   }
-)();
+})();
 
 // Notify stock, using only Telegram for now
 function notifyStock(product) {

@@ -6,3 +6,8 @@ In certain platforms it will require to install Chromium manually. For example, 
 
 Solved using
 `sudo apt-get install chromium-browser`
+
+## Crontab examples
+
+`*/2 * * * * cd /home/pi/xbox-stock-checker && /usr/local/bin/node /home/pi/xbox-stock-checker/src/index.js > /home/pi/xbox-stock-checker/cronlog.log 2>&1`\
+`*/5 * * * * cd /home/pi/xbox-stock-checker && /usr/local/bin/npm start > /home/pi/xbox-stock-checker/cronlog.log`

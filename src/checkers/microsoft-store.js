@@ -38,6 +38,25 @@ module.exports.checkStock = async function (page, product, storeCode) {
     throw new Error(
       "Error when finding selectors, storeCode provided not found"
     );
+
+  // pre-start: page setup, avoid loading assets
+  await page.removeAllListeners("request");
+  await page.setRequestInterception(true);
+  page.on("request", (req) => {
+    if (
+      req.resourceType() == "stylesheet" ||
+      req.resourceType() == "script" ||
+      req.resourceType() == "fetch" ||
+      req.resourceType() == "other" ||
+      req.resourceType() == "font" ||
+      req.resourceType() == "image"
+    ) {
+      req.abort();
+    } else {
+      logger.debug(`Request resource type: ${req.resourceType()}`);
+      req.continue();
+    }
+  });
   // Start
   logger.info(`Checking Microsoft Store ${selectorInfo.storeCode}`);
   logger.debug(`Opening page ${product.url} ...`);

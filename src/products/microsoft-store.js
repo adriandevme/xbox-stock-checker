@@ -48,12 +48,4 @@ module.exports = [
     siteName: "Microsoft Store Polonia",
     checker: "microsoft-store-pl.js",
   },
-  // //Xbox Series S - PL
-  // {
-  //   url: "https://www.xbox.com/es-es/configure/942J774TP9JN",
-  //   name: "Xbox Series S",
-  //   siteUrl: '"https://www.xbox.com/es-es',
-  //   siteName: "Microsoft Store Espana",
-  //   checker: "microsoft-store-es.js",
-  // },
 ];

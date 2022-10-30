@@ -1,7 +1,7 @@
 {
   "name": "xbox-stock-checker",
   "version": "1.0.0",
-  "description": "Basic script for checking xbox stock on the different microsoft's stores",
+  "description": "A simple script made for checking available stock of Xbox Series X and nofity via Telegram.",
   "main": "index.js",
   "scripts": {
     "start": "node ./src/index.js",

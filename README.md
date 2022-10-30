@@ -2,6 +2,14 @@
 
 A simple script made for checking available stock of Xbox Series X and nofity via Telegram.
 
+This inital version can check the available stock in the following Microsoft's Stores:
+
+- [Microsoft Store Germany](https://www.xbox.com/de-de/configure/8WJ714N3RBTL)
+- [Microsoft Store Spain](https://www.xbox.com/es-es/configure/8WJ714N3RBTL)
+- [Microsoft Store France](https://www.xbox.com/fr-fr/configure/8WJ714N3RBTL)
+- [Microsoft Store Italy](https://www.xbox.com/it-it/configure/8WJ714N3RBTL)
+- [Microsoft Store Poland](https://www.xbox.com/pl-pl/configure/8WJ714N3RBTL)
+
 ## Setup
 
 Clone the repo and use `npm install` for installing needed dependencies. The program requires an .env file in the root folder, and a pre-configured Telegram [bot](https://core.telegram.org/bots#how-do-i-create-a-bot) and channel. An .env.example file can be found in the root folder.

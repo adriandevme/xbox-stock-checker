@@ -5,7 +5,7 @@ const logger = require("./utils/log");
 const telegram = require("./utils/telegram");
 
 //PUPPETEER - Config
-const HEADLESS_MODE = process.env.PUPPETEER_HEADLESS_MODE;
+const HEADLESS_MODE = process.env.PUPPETEER_HEADLESS_MODE === "true";
 const EXECUTABLE_PATH = process.env.PUPPETEER_EXECUTABLE_PATH;
 const DEFAULT_PAGE_TIMEOUT = process.env.PUPPETEER_DEFAULT_PAGE_TIMEOUT;
 
